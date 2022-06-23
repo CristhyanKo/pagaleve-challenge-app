@@ -1,7 +1,7 @@
-export default function Home() {
-	return (
-		<div>
-			<h1>Hello World</h1>
-		</div>
-	)
+// import Button from '@mui/material/Button'
+
+import Home from '../components/pages/home'
+
+export default function Index() {
+	return <Home />
 }
