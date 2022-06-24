@@ -46,6 +46,16 @@ export default function CustomerList() {
 		setCreate(true)
 	}
 
+	const handleSelectCustomer = (customerItem: ICustomer) => {
+		setCreate(false)
+
+		if (customer === customerItem) {
+			setCustomer(null)
+		} else {
+			setCustomer(customerItem)
+		}
+	}
+
 	return (
 		<>
 			<CustomerListBox>
@@ -55,10 +65,7 @@ export default function CustomerList() {
 							{customers &&
 								customers.map((customerItem: ICustomer, key: number) => (
 									<ListItem key={key}>
-										<MiniCustomer
-											active={customerItem === customer}
-											onClick={() => (customer === customerItem ? setCustomer(null) : setCustomer(customerItem))}
-										>
+										<MiniCustomer active={customerItem === customer} onClick={() => handleSelectCustomer(customerItem)}>
 											<Avatar alt={customerItem.name} src={customerItem.userImage} />
 											<MiniCustomerDetails>
 												<p>{customerItem.name}</p>
