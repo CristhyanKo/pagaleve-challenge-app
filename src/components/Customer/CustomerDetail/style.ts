@@ -5,7 +5,7 @@ export const CustomerDetailBox = styled.div`
 	flex-direction: column;
 	background-color: #fff;
 	border-radius: 4px;
-	height: 100%;
+	height: 630px;
 	padding: 20px;
 	box-sizing: border-box;
 `

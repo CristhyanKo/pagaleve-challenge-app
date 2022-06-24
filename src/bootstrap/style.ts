@@ -16,4 +16,23 @@ export const GlobalStyle = createGlobalStyle`
 		-o-background-size: cover;
 		background-size: cover;
 	}
+
+		* {
+			scrollbar-width: auto;
+			scrollbar-color: #1232A1 #ffffff;
+		}
+
+		*::-webkit-scrollbar {
+			width: 15px;
+		}
+
+		*::-webkit-scrollbar-track {
+			background: transparent;
+		}
+
+		*::-webkit-scrollbar-thumb {
+			background-color: #1232A1;
+			border-radius: 10px;
+			border: 3px solid #ffffff;
+		}
 `

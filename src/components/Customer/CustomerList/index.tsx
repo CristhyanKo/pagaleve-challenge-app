@@ -47,33 +47,35 @@ export default function CustomerList() {
 	}
 
 	return (
-		<CustomerListBox>
-			{customers.length > 0 ? (
-				<>
-					<List>
-						{customers &&
-							customers.map((customerItem: ICustomer, key: number) => (
-								<ListItem key={key}>
-									<MiniCustomer
-										active={customerItem === customer}
-										onClick={() => (customer === customerItem ? setCustomer(null) : setCustomer(customerItem))}
-									>
-										<Avatar alt={customerItem.name} src={customerItem.userImage} />
-										<MiniCustomerDetails>
-											<p>{customerItem.name}</p>
-											<span>{customerItem.email}</span>
-										</MiniCustomerDetails>
-									</MiniCustomer>
-								</ListItem>
-							))}
-					</List>
-					<AddNewButtom>
-						<Button startIcon={<GrAdd />} id='addNew' name='Add Customer' onClick={handleAddNew} />
-					</AddNewButtom>
-				</>
-			) : (
-				<EmptyList />
-			)}
-		</CustomerListBox>
+		<>
+			<CustomerListBox>
+				{customers.length > 0 ? (
+					<>
+						<List>
+							{customers &&
+								customers.map((customerItem: ICustomer, key: number) => (
+									<ListItem key={key}>
+										<MiniCustomer
+											active={customerItem === customer}
+											onClick={() => (customer === customerItem ? setCustomer(null) : setCustomer(customerItem))}
+										>
+											<Avatar alt={customerItem.name} src={customerItem.userImage} />
+											<MiniCustomerDetails>
+												<p>{customerItem.name}</p>
+												<span>{customerItem.email}</span>
+											</MiniCustomerDetails>
+										</MiniCustomer>
+									</ListItem>
+								))}
+						</List>
+					</>
+				) : (
+					<EmptyList />
+				)}
+			</CustomerListBox>
+			<AddNewButtom>
+				<Button startIcon={<GrAdd />} id='addNew' name='Add Customer' onClick={handleAddNew} />
+			</AddNewButtom>
+		</>
 	)
 }

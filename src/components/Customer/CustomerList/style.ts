@@ -4,12 +4,15 @@ import IMiniCustomer from '../interfaces/IMiniCustomer'
 export const CustomerListBox = styled.div`
 	background-color: #fff;
 	border-radius: 4px;
-	height: 100%;
+	height: 630px;
 	padding: 20px;
 	box-sizing: border-box;
 
 	-webkit-box-shadow: 0px 0px 50px 10px rgba(0, 0, 0, 0.2);
 	box-shadow: 0px 0px 50px 10px rgba(0, 0, 0, 0.2);
+
+	overflow-y: auto;
+	overflow-x: hidden;
 `
 export const List = styled.ul`
 	margin: 0;
@@ -19,11 +22,14 @@ export const List = styled.ul`
 `
 
 export const AddNewButtom = styled.div`
+	display: flex;
+	justify-content: flex-end;
 	position: relative;
-	left: 155px;
-	top: -30px;
+	top: -50px;
 	opacity: 0.7;
-
+	margin-right: 15px;
+	width: 190px;
+	float: inline-end;
 	:hover {
 		opacity: 1;
 	}

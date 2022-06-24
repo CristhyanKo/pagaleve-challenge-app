@@ -18,7 +18,7 @@ export default function Input({
 	helperText,
 }: IInput) {
 	return (
-		<div style={{ width: width ? width : '100%' }}>
+		<div style={{ width: '100%', maxWidth: width ? width : '100%' }}>
 			<TextField
 				type={type}
 				name={name}

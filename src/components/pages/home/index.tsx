@@ -11,10 +11,10 @@ export default function Home() {
 			<CustomerBox>
 				<CustomerProvider>
 					<Grid container spacing={2}>
-						<Grid item xs={4}>
+						<Grid item md={4} sm={12} xs={12}>
 							<CustomerList />
 						</Grid>
-						<Grid item xs={8}>
+						<Grid item md={8} sm={12} xs={12}>
 							<CustomerDetail />
 						</Grid>
 					</Grid>

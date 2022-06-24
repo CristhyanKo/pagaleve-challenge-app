@@ -21,7 +21,7 @@ export default function InputMask({
 	maskPlaceholder,
 }: IInputMask) {
 	return (
-		<div style={{ width: width ? width : '100%' }}>
+		<div style={{ width: '100%', maxWidth: width ? width : '100%' }}>
 			<InputMasked
 				maskPlaceholder={maskPlaceholder}
 				id={id}
