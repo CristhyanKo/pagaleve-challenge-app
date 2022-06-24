@@ -12,8 +12,8 @@ export default class BaseService {
 		return response.data.result.data
 	}
 
-	async update(data: object) {
-		const response = await api.post(`${this._routeBase}/update`, data)
+	async update(id: string, data: object) {
+		const response = await api.post(`${this._routeBase}/update/${id}`, data)
 		return response.data.result.data
 	}
 

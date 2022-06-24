@@ -4,13 +4,18 @@ import { Form, Formik } from 'formik'
 import Button from '../../common/Buttom'
 import Input from '../../common/Input'
 import { CustomerDetailBox, CustomerDetails, CustomerImage } from './style'
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
 import { CustomerContext, CustomerContextType } from '../contexts/CustomerContext'
 import ICustomer from '../interfaces/ICustomer'
 import InputMask from '../../common/InputMasked'
-
+import CustomerService from '../../../services/CustomerService'
+import { toast } from 'react-toastify'
 export default function CustomerDetail() {
-	const { customer } = useContext(CustomerContext) as CustomerContextType
+	const service = new CustomerService()
+
+	const { customer, setCustomer } = useContext(CustomerContext) as CustomerContextType
+
+	const [isLoading, setIsLoading] = useState(false)
 
 	const schema = Yup.object().shape({
 		name: Yup.string().required('Name is required'),
@@ -20,15 +25,44 @@ export default function CustomerDetail() {
 	})
 
 	const initialValues: ICustomer = {
+		_id: customer?._id || '',
 		name: customer?.name || '',
 		email: customer?.email || '',
 		phone: customer?.phone || '',
 		userImage: customer?.userImage || '',
 	}
 
+	const handleSubmit = async (values: ICustomer) => {
+		setIsLoading(true)
+		if (customer && customer._id) {
+			await service
+				.update(customer._id, values)
+				.then(() => {
+					toast.success('Customer updated!', {
+						position: 'top-right',
+						autoClose: 5000,
+						hideProgressBar: false,
+						closeOnClick: true,
+						pauseOnHover: true,
+						draggable: true,
+						progress: undefined,
+					})
+					setCustomer(values)
+				})
+				.catch((err) => {
+					console.log(err)
+				})
+				.finally(() => {
+					setIsLoading(false)
+				})
+		}
+
+		console.log(values)
+	}
+
 	return (
 		<CustomerDetailBox>
-			<Formik onSubmit={(d) => console.log('submiting', d)} validationSchema={schema} initialValues={initialValues} enableReinitialize>
+			<Formik onSubmit={handleSubmit} validationSchema={schema} initialValues={initialValues} enableReinitialize>
 				{({ errors, handleChange, touched, values }) => {
 					return (
 						<Form noValidate>
@@ -70,7 +104,14 @@ export default function CustomerDetail() {
 									onChange={handleChange}
 									value={values.phone}
 								/>
-								<Button type='submit' name='Save' color='#18687E' textColor='#fff' marginTop='20px' />
+								<Button
+									isLoading={isLoading}
+									type='submit'
+									name={customer ? 'Save' : 'Create'}
+									color='#18687E'
+									textColor='#fff'
+									marginTop='20px'
+								/>
 							</CustomerDetails>
 						</Form>
 					)

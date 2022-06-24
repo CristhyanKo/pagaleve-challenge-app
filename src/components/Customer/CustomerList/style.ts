@@ -19,6 +19,11 @@ export const List = styled.ul`
 
 export const ListItem = styled.li`
 	margin-bottom: 10px;
+	user-select: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
 
 	:last-child {
 		margin-bottom: 0;
