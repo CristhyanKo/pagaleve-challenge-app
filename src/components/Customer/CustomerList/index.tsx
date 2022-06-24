@@ -73,9 +73,11 @@ export default function CustomerList() {
 					<EmptyList />
 				)}
 			</CustomerListBox>
-			<AddNewButtom>
-				<Button startIcon={<GrAdd />} id='addNew' name='Add Customer' onClick={handleAddNew} />
-			</AddNewButtom>
+			{customers.length > 0 && (
+				<AddNewButtom>
+					<Button startIcon={<GrAdd />} id='addNew' name='Add Customer' onClick={handleAddNew} />
+				</AddNewButtom>
+			)}
 		</>
 	)
 }
