@@ -15,6 +15,18 @@ export const List = styled.ul`
 	margin: 0;
 	padding: 0;
 	list-style: none;
+	height: 100%;
+`
+
+export const AddNewButtom = styled.div`
+	position: relative;
+	left: 155px;
+	top: -30px;
+	opacity: 0.7;
+
+	:hover {
+		opacity: 1;
+	}
 `
 
 export const ListItem = styled.li`

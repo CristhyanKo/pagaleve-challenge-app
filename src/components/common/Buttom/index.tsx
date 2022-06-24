@@ -1,7 +1,7 @@
 import IButton from './interfaces/IButton'
 import { CustomButton } from './style'
 
-export default function Button({ type, id, name, disabled, onClick, className, size, isLoading, color, textColor, marginTop }: IButton) {
+export default function Button({ type, id, name, disabled, onClick, className, size, isLoading, color, textColor, marginTop, startIcon }: IButton) {
 	return (
 		<CustomButton
 			id={id}
@@ -15,6 +15,7 @@ export default function Button({ type, id, name, disabled, onClick, className, s
 			textcolor={textColor}
 			margintop={marginTop}
 			type={type}
+			startIcon={startIcon}
 		>
 			{name}
 		</CustomButton>

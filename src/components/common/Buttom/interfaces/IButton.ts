@@ -10,4 +10,5 @@ export default interface IButton {
 	color?: string
 	textColor?: string
 	marginTop?: string
+	startIcon?: React.ReactNode
 }

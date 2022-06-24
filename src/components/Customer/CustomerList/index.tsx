@@ -1,15 +1,18 @@
 import { Avatar } from '@mui/material'
-import { SetStateAction, useContext, useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import CustomerService from '../../../services/CustomerService'
-import { CustomerListBox, List, ListItem, MiniCustomer, MiniCustomerDetails } from './style'
+import { AddNewButtom, CustomerListBox, List, ListItem, MiniCustomer, MiniCustomerDetails } from './style'
 import ICustomer from '../interfaces/ICustomer'
 import { CustomerContext, CustomerContextType } from '../contexts/CustomerContext'
+import EmptyList from '../EmptyList'
+import Button from '../../common/Buttom'
+import { GrAdd } from 'react-icons/gr'
 
 export default function CustomerList() {
 	const service = new CustomerService()
 
 	const [customers, setCustomers] = useState<ICustomer[]>([])
-	const { customer, setCustomer } = useContext(CustomerContext) as CustomerContextType
+	const { customer, setCustomer, setCreate, create } = useContext(CustomerContext) as CustomerContextType
 
 	const getInitialData = async () => {
 		const data = await service.getAll()
@@ -21,9 +24,13 @@ export default function CustomerList() {
 	}, [])
 
 	useEffect(() => {
-		console.log('entrou', customer)
 		if (customer) {
 			setCustomers((prev: ICustomer[]) => {
+				if (create) {
+					setCreate(false)
+					return [...prev, customer]
+				}
+
 				return prev.map((c: ICustomer) => {
 					if (c._id === customer._id) {
 						return customer
@@ -34,25 +41,39 @@ export default function CustomerList() {
 		}
 	}, [customer])
 
+	const handleAddNew = () => {
+		setCustomer(null)
+		setCreate(true)
+	}
+
 	return (
 		<CustomerListBox>
-			<List>
-				{customers &&
-					customers.map((customerItem: ICustomer, key: number) => (
-						<ListItem key={key}>
-							<MiniCustomer
-								active={customerItem === customer}
-								onClick={() => (customer ? setCustomer(null) : setCustomer(customerItem))}
-							>
-								<Avatar alt={customerItem.name} src={customerItem.userImage} />
-								<MiniCustomerDetails>
-									<p>{customerItem.name}</p>
-									<span>{customerItem.email}</span>
-								</MiniCustomerDetails>
-							</MiniCustomer>
-						</ListItem>
-					))}
-			</List>
+			{customers.length > 0 ? (
+				<>
+					<List>
+						{customers &&
+							customers.map((customerItem: ICustomer, key: number) => (
+								<ListItem key={key}>
+									<MiniCustomer
+										active={customerItem === customer}
+										onClick={() => (customer === customerItem ? setCustomer(null) : setCustomer(customerItem))}
+									>
+										<Avatar alt={customerItem.name} src={customerItem.userImage} />
+										<MiniCustomerDetails>
+											<p>{customerItem.name}</p>
+											<span>{customerItem.email}</span>
+										</MiniCustomerDetails>
+									</MiniCustomer>
+								</ListItem>
+							))}
+					</List>
+					<AddNewButtom>
+						<Button startIcon={<GrAdd />} id='addNew' name='Add Customer' onClick={handleAddNew} />
+					</AddNewButtom>
+				</>
+			) : (
+				<EmptyList />
+			)}
 		</CustomerListBox>
 	)
 }

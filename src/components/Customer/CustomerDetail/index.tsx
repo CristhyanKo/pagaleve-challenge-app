@@ -10,17 +10,19 @@ import ICustomer from '../interfaces/ICustomer'
 import InputMask from '../../common/InputMasked'
 import CustomerService from '../../../services/CustomerService'
 import { toast } from 'react-toastify'
+import EmptyDetail from '../EmptyDetail'
+
 export default function CustomerDetail() {
 	const service = new CustomerService()
 
-	const { customer, setCustomer } = useContext(CustomerContext) as CustomerContextType
+	const { customer, setCustomer, create } = useContext(CustomerContext) as CustomerContextType
 
 	const [isLoading, setIsLoading] = useState(false)
 
 	const schema = Yup.object().shape({
 		name: Yup.string().required('Name is required'),
-		email: Yup.string().email('Email is invalid'),
-		phone: Yup.string(),
+		email: Yup.string().email('Email is invalid').required('Email is required'),
+		phone: Yup.string().required('Phone is required'),
 		userImage: Yup.string(),
 	})
 
@@ -34,7 +36,7 @@ export default function CustomerDetail() {
 
 	const handleSubmit = async (values: ICustomer) => {
 		setIsLoading(true)
-		if (customer && customer._id) {
+		if (customer && customer._id && !create) {
 			await service
 				.update(customer._id, values)
 				.then(() => {
@@ -49,74 +51,118 @@ export default function CustomerDetail() {
 					})
 					setCustomer(values)
 				})
-				.catch((err) => {
-					console.log(err)
+				.catch(() => {
+					toast.error('Sorry we had an error.', {
+						position: 'top-right',
+						autoClose: 5000,
+						hideProgressBar: false,
+						closeOnClick: true,
+						pauseOnHover: true,
+						draggable: true,
+						progress: undefined,
+					})
 				})
 				.finally(() => {
 					setIsLoading(false)
 				})
 		}
 
-		console.log(values)
+		if (create) {
+			delete values._id
+			await service
+				.store(values)
+				.then((data) => {
+					toast.success('Customer created!', {
+						position: 'top-right',
+						autoClose: 5000,
+						hideProgressBar: false,
+						closeOnClick: true,
+						pauseOnHover: true,
+						draggable: true,
+						progress: undefined,
+					})
+					setCustomer(data)
+				})
+				.catch(() => {
+					toast.error('Sorry we had an error.', {
+						position: 'top-right',
+						autoClose: 5000,
+						hideProgressBar: false,
+						closeOnClick: true,
+						pauseOnHover: true,
+						draggable: true,
+						progress: undefined,
+					})
+				})
+				.finally(() => {
+					setIsLoading(false)
+				})
+		}
 	}
 
 	return (
 		<CustomerDetailBox>
-			<Formik onSubmit={handleSubmit} validationSchema={schema} initialValues={initialValues} enableReinitialize>
-				{({ errors, handleChange, touched, values }) => {
-					return (
-						<Form noValidate>
-							<CustomerImage>
-								<Avatar alt={values.name} src={values.userImage} sx={{ width: 150, height: 150 }} />
-							</CustomerImage>
-							<CustomerDetails>
-								<Input
-									id='name'
-									name='name'
-									label='Name'
-									width='400px'
-									required
-									error={touched.name && Boolean(errors.name)}
-									helperText={touched.name && errors.name}
-									onChange={handleChange}
-									value={values.name}
-								/>
-								<Input
-									id='email'
-									name='email'
-									label='Email'
-									width='400px'
-									error={touched.email && Boolean(errors.email)}
-									helperText={touched.email && errors.email}
-									onChange={handleChange}
-									value={values.email}
-									type='email'
-								/>
-								<InputMask
-									mask='(99) 9 9999-9999'
-									maskPlaceholder={' '}
-									id='phone'
-									name='phone'
-									label='Phone'
-									width='400px'
-									error={touched.phone && Boolean(errors.phone)}
-									helperText={touched.phone && errors.phone}
-									onChange={handleChange}
-									value={values.phone}
-								/>
-								<Button
-									isLoading={isLoading}
-									type='submit'
-									name={customer ? 'Save' : 'Create'}
-									color='#18687E'
-									textColor='#fff'
-									marginTop='20px'
-								/>
-							</CustomerDetails>
-						</Form>
-					)
-				}}
-			</Formik>
+			{customer || create ? (
+				<Formik onSubmit={handleSubmit} validationSchema={schema} initialValues={initialValues} enableReinitialize>
+					{({ errors, handleChange, touched, values }) => {
+						return (
+							<Form noValidate>
+								<CustomerImage>
+									<Avatar alt={values.name} src={values.userImage} sx={{ width: 150, height: 150 }} />
+								</CustomerImage>
+								<CustomerDetails>
+									<Input
+										id='name'
+										name='name'
+										label='Name'
+										width='400px'
+										required
+										error={touched.name && Boolean(errors.name)}
+										helperText={touched.name && errors.name}
+										onChange={handleChange}
+										value={values.name}
+									/>
+									<Input
+										id='email'
+										name='email'
+										label='Email'
+										width='400px'
+										error={touched.email && Boolean(errors.email)}
+										helperText={touched.email && errors.email}
+										onChange={handleChange}
+										value={values.email}
+										type='email'
+										required
+									/>
+									<InputMask
+										mask='(99) 9 9999-9999'
+										maskPlaceholder={' '}
+										id='phone'
+										name='phone'
+										label='Phone'
+										width='400px'
+										error={touched.phone && Boolean(errors.phone)}
+										helperText={touched.phone && errors.phone}
+										onChange={handleChange}
+										value={values.phone}
+										required
+									/>
+									<Button
+										isLoading={isLoading}
+										type='submit'
+										name={customer ? 'Save' : 'Create'}
+										color='#18687E'
+										textColor='#fff'
+										marginTop='20px'
+									/>
+								</CustomerDetails>
+							</Form>
+						)
+					}}
+				</Formik>
+			) : (
+				<EmptyDetail />
+			)}
 		</CustomerDetailBox>
 	)
 }
