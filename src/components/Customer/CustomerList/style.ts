@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import IMiniCustomer from './interfaces/IMiniCustomer'
+import IMiniCustomer from '../interfaces/IMiniCustomer'
 
 export const CustomerListBox = styled.div`
 	background-color: #fff;
@@ -8,8 +8,8 @@ export const CustomerListBox = styled.div`
 	padding: 20px;
 	box-sizing: border-box;
 
-	-webkit-box-shadow: 0px 0px 50px 10px rgba(0, 0, 0, 0.1);
-	box-shadow: 0px 0px 50px 10px rgba(0, 0, 0, 0.1);
+	-webkit-box-shadow: 0px 0px 50px 10px rgba(0, 0, 0, 0.2);
+	box-shadow: 0px 0px 50px 10px rgba(0, 0, 0, 0.2);
 `
 export const List = styled.ul`
 	margin: 0;

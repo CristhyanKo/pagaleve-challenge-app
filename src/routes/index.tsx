@@ -3,12 +3,12 @@ import PageNotFound from '../pages/404'
 import Index from '../pages/home'
 
 export default function AppRoutes() {
-  return (
-    <BrowserRouter>
-      <Routes>
-        <Route path='*' element={<PageNotFound />} />
-        <Route path='/' element={<Index />} />
-      </Routes>
-    </BrowserRouter>
-  )
+	return (
+		<BrowserRouter>
+			<Routes>
+				<Route path='*' element={<PageNotFound />} />
+				<Route path='/' element={<Index />} />
+			</Routes>
+		</BrowserRouter>
+	)
 }

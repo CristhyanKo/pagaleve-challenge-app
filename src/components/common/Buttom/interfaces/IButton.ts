@@ -1,6 +1,7 @@
 export default interface IButton {
 	id?: string
 	name: string
+	type?: 'button' | 'submit' | 'reset' | undefined
 	disabled?: boolean
 	className?: string
 	size?: 'small' | 'medium' | 'large' | undefined
@@ -8,4 +9,5 @@ export default interface IButton {
 	onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void
 	color?: string
 	textColor?: string
+	marginTop?: string
 }

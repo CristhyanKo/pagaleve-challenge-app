@@ -14,8 +14,8 @@ export default function Input({
 	className,
 	placeholder,
 	error,
-	errorMessage,
 	width,
+	helperText,
 }: IInput) {
 	return (
 		<div style={{ width: width ? width : '100%' }}>
@@ -31,7 +31,7 @@ export default function Input({
 				disabled={disabled}
 				className={className}
 				onChange={onChange}
-				helperText={error ? errorMessage : placeholder}
+				helperText={helperText ? helperText : placeholder}
 				error={error}
 				margin='dense'
 				fullWidth

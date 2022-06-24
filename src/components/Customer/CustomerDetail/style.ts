@@ -8,6 +8,9 @@ export const CustomerDetailBox = styled.div`
 	height: 100%;
 	padding: 20px;
 	box-sizing: border-box;
+
+	-webkit-box-shadow: 0px 0px 50px 10px rgba(0, 0, 0, 0.2);
+	box-shadow: 0px 0px 50px 10px rgba(0, 0, 0, 0.2);
 `
 
 export const CustomerImage = styled.div`

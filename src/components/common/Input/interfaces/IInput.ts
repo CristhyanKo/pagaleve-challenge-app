@@ -1,3 +1,5 @@
+import React from 'react'
+
 export default interface IInput {
 	id: string
 	label: string
@@ -11,6 +13,7 @@ export default interface IInput {
 	disabled?: boolean
 	className?: string
 	error?: boolean
-	errorMessage?: string
 	width?: string
+	formikField?: boolean
+	helperText?: React.ReactNode
 }
