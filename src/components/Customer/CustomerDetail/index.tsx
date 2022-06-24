@@ -7,6 +7,7 @@ import { CustomerDetailBox, CustomerDetails, CustomerImage } from './style'
 import { useContext } from 'react'
 import { CustomerContext, CustomerContextType } from '../contexts/CustomerContext'
 import ICustomer from '../interfaces/ICustomer'
+import InputMask from '../../common/InputMasked'
 
 export default function CustomerDetail() {
 	const { customer } = useContext(CustomerContext) as CustomerContextType
@@ -57,7 +58,9 @@ export default function CustomerDetail() {
 									value={values.email}
 									type='email'
 								/>
-								<Input
+								<InputMask
+									mask='(99) 9 9999-9999'
+									maskPlaceholder={' '}
 									id='phone'
 									name='phone'
 									label='Phone'
