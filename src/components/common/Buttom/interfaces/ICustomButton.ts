@@ -1,7 +1,7 @@
 import { ButtonProps } from '@mui/material'
 
 export default interface ICustomButton extends ButtonProps {
-	customColor?: string
-	textColor?: string
-	marginTop?: string
+	customcolor?: string
+	textcolor?: string
+	margintop?: string
 }

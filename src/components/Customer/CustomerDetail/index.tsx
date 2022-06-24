@@ -28,12 +28,12 @@ export default function CustomerDetail() {
 
 	return (
 		<CustomerDetailBox>
-			<Formik onSubmit={(d) => console.log('submiting', d)} validationSchema={schema} initialValues={initialValues}>
+			<Formik onSubmit={(d) => console.log('submiting', d)} validationSchema={schema} initialValues={initialValues} enableReinitialize>
 				{({ errors, handleChange, touched, values }) => {
 					return (
 						<Form noValidate>
 							<CustomerImage>
-								<Avatar alt='test' src='https://mui.com/static/images/avatar/2.jpg' sx={{ width: 150, height: 150 }} />
+								<Avatar alt={values.name} src={values.userImage} sx={{ width: 150, height: 150 }} />
 							</CustomerImage>
 							<CustomerDetails>
 								<Input

@@ -11,9 +11,9 @@ export default function Button({ type, id, name, disabled, onClick, className, s
 			size={size || 'medium'}
 			loading={isLoading}
 			variant='contained'
-			customColor={color}
-			textColor={textColor}
-			marginTop={marginTop}
+			customcolor={color}
+			textcolor={textColor}
+			margintop={marginTop}
 			type={type}
 		>
 			{name}

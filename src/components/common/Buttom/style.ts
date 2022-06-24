@@ -5,10 +5,10 @@ import contrastTextColor from '../../../helper/contrastTextColor'
 import pSBC from 'shade-blend-color'
 
 export const CustomButton = styled(LoadingButton)<ICustomButton>((props) => ({
-	color: props.textColor ? props.textColor : contrastTextColor(<string>props.customColor || '#00D0B3'),
-	backgroundColor: props.customColor || '#00D0B3',
-	marginTop: props.marginTop || '0px',
+	color: props.textcolor ? props.textcolor : contrastTextColor(<string>props.customcolor || '#00D0B3'),
+	backgroundColor: props.customcolor || '#00D0B3',
+	marginTop: props.margintop || '0px',
 	'&:hover': {
-		backgroundColor: pSBC(-0.1, props.customColor) || '#00D0B3',
+		backgroundColor: pSBC(-0.1, props.customcolor) || '#00D0B3',
 	},
 }))

@@ -1,46 +1,40 @@
 import { Avatar } from '@mui/material'
+import { useContext, useEffect, useState } from 'react'
+import CustomerService from '../../../services/CustomerService'
 import { CustomerListBox, List, ListItem, MiniCustomer, MiniCustomerDetails } from './style'
+import ICustomer from '../interfaces/ICustomer'
+import { CustomerContext, CustomerContextType } from '../contexts/CustomerContext'
 
 export default function CustomerList() {
+	const service = new CustomerService()
+
+	const [customers, setCustomers] = useState([])
+	const { customer, setCustomer } = useContext(CustomerContext) as CustomerContextType
+
+	const getInitialData = async () => {
+		const data = await service.getAll()
+		setCustomers(data)
+	}
+
+	useEffect(() => {
+		getInitialData()
+	}, [])
+
 	return (
 		<CustomerListBox>
 			<List>
-				<ListItem>
-					<MiniCustomer>
-						<Avatar alt='test' src='https://mui.com/static/images/avatar/1.jpg' />
-						<MiniCustomerDetails>
-							<p>John Doe</p>
-							<span>jhondoe@email.com</span>
-						</MiniCustomerDetails>
-					</MiniCustomer>
-				</ListItem>
-				<ListItem>
-					<MiniCustomer active>
-						<Avatar alt='test' src='https://mui.com/static/images/avatar/2.jpg' />
-						<MiniCustomerDetails>
-							<p>John Doe</p>
-							<span>jhondoe@email.com</span>
-						</MiniCustomerDetails>
-					</MiniCustomer>
-				</ListItem>
-				<ListItem>
-					<MiniCustomer>
-						<Avatar alt='test' src='https://via.placeholder.com/150' />
-						<MiniCustomerDetails>
-							<p>John Doe</p>
-							<span>jhondoe@email.com</span>
-						</MiniCustomerDetails>
-					</MiniCustomer>
-				</ListItem>
-				<ListItem>
-					<MiniCustomer>
-						<Avatar alt='test' src='https://via.placeholder.com/150' />
-						<MiniCustomerDetails>
-							<p>John Doe</p>
-							<span>jhondoe@email.com</span>
-						</MiniCustomerDetails>
-					</MiniCustomer>
-				</ListItem>
+				{customers &&
+					customers.map((customerItem: ICustomer, key: number) => (
+						<ListItem key={key}>
+							<MiniCustomer active={customerItem === customer} onClick={() => setCustomer(customerItem)}>
+								<Avatar alt={customerItem.name} src={customerItem.userImage} />
+								<MiniCustomerDetails>
+									<p>{customerItem.name}</p>
+									<span>{customerItem.email}</span>
+								</MiniCustomerDetails>
+							</MiniCustomer>
+						</ListItem>
+					))}
 			</List>
 		</CustomerListBox>
 	)
