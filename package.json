@@ -2,6 +2,7 @@
 	"name": "pagaleve-app",
 	"version": "0.1.0",
 	"private": true,
+	"homepage": "https://cristhyanko.github.io/pagaleve-challenge-app/",
 	"dependencies": {
 		"@emotion/react": "^11.9.3",
 		"@emotion/styled": "^11.9.3",
@@ -37,7 +38,8 @@
 		"test": "react-scripts test",
 		"eject": "react-scripts eject",
 		"lint": "eslint . --ext .ts",
-		"lint:fix": "eslint --fix --ignore-path .gitignore ."
+		"lint:fix": "eslint --fix --ignore-path .gitignore .",
+		"deploy": "npm run build && gh-pages -d build"
 	},
 	"eslintConfig": {
 		"extends": [
@@ -68,6 +70,7 @@
 		"eslint-plugin-import": "^2.26.0",
 		"eslint-plugin-import-helpers": "^1.2.1",
 		"eslint-plugin-prettier": "^4.0.0",
+		"gh-pages": "^4.0.0",
 		"prettier": "^2.7.1"
 	}
 }
