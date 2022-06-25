@@ -6,7 +6,8 @@ export default function AppRoutes() {
 	return (
 		<BrowserRouter>
 			<Routes>
-				<Route path='*' element={<Index />} />
+				<Route path='*' element={<PageNotFound />} />
+				<Route path='/' element={<Index />} />
 			</Routes>
 		</BrowserRouter>
 	)
