@@ -15,8 +15,8 @@ The purpose of this App is to perform the basic management (Create and Update) o
 
 Prerequisites
 
-- [Node.js](https://nodejs.org/en/)
 - [API Rest for Customers](https://github.com/CristhyanKo/pagaleve-challenge-service)
+- [Node.js](https://nodejs.org/en/)
 
 In the project directory, you can run:
 
