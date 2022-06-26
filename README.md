@@ -30,7 +30,7 @@ Yarn:
 yarn
 ```
 
-After installing the dependencies, now you need to create the `.env` environment variables file in the root of your project with a Rest API URL:
+After installing the dependencies, now you need to create the `.env` environment variables file in the root of your project with a [API Rest for Customers](https://github.com/CristhyanKo/pagaleve-challenge-service):
 ```env
 REACT_APP_API_URL=http://localhost:3001/api/v1/
 ```
