@@ -29,3 +29,14 @@ Yarn:
 ```bash
 yarn
 ```
+After installing the dependencies, let's start the project by running:
+
+Npm:
+```bash
+npm start
+```
+
+Yarn:
+```bash
+yarn start
+```
