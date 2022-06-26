@@ -29,8 +29,13 @@ Yarn:
 ```bash
 yarn
 ```
-After installing the dependencies, let's start the project by running:
 
+After installing the dependencies, now you need to create the `.env` environment variables file in the root of your project with a Rest API URL:
+```env
+REACT_APP_API_URL=http://localhost:3001/api/v1/
+```
+
+Let's start the project by running:
 Npm:
 ```bash
 npm start
