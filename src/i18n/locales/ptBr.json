@@ -1,0 +1,21 @@
+{
+	"customer.list.add.button": "Novo",
+	"customer.list.empty.button": "Novo",
+	"customer.list.empty.title": "Parece que você ainda não registrou nenhum cliente!",
+	"customer.list.empty.description": "Clique no botão abaixo para cadastrar seu primeiro cliente",
+	"customer.detail.empty.description": "Selecione pelo menos um cliente para ver os detalhes!",
+	"customer.detail.input.name.name": "Nome",
+	"customer.detail.input.name.require": "Nome é obrigatório",
+	"customer.detail.input.email.name": "Email",
+	"customer.detail.input.email.require": "Email é obrigatório",
+	"customer.detail.input.email.invalid": "Email inválido",
+	"customer.detail.input.phone.name": "Telefone",
+	"customer.detail.input.phone.require": "Telefone é obrigatório",
+	"customer.detail.button.save": "Salvar",
+	"customer.detail.button.create": "Criar",
+	"customer.detail.button.delete": "Deletar",
+	"toast.default.error": "Desculpe, tivemos um erro.",
+	"customer.toast.delete": "Cliente deletado!",
+	"customer.toast.create": "Cliente criado!",
+	"customer.toast.update": "Cliente atualizado!"
+}

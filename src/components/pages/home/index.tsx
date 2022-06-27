@@ -2,12 +2,14 @@ import { Grid } from '@mui/material'
 import CustomerProvider from '../../Customer/contexts/CustomerContext'
 import CustomerDetail from '../../Customer/CustomerDetail'
 import CustomerList from '../../Customer/CustomerList'
+import LanguageSelector from '../../LanguageSelector'
 import PageContainer from '../../PageContainer'
 import { CustomerBox } from './style'
 
 export default function Home() {
 	return (
 		<PageContainer title={'Inicio'}>
+			<LanguageSelector />
 			<CustomerBox>
 				<CustomerProvider>
 					<Grid container spacing={2}>

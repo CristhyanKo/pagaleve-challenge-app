@@ -23,3 +23,10 @@ export const CustomerDetails = styled.div`
 	align-items: center;
 	margin: 20px 0;
 `
+export const Actions = styled.div`
+	display: flex;
+
+	.deleteButton {
+		margin-left: 20px;
+	}
+`

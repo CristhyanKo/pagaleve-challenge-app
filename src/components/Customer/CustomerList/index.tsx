@@ -5,14 +5,16 @@ import { AddNewButtom, CustomerListBox, List, ListItem, MiniCustomer, MiniCustom
 import ICustomer from '../interfaces/ICustomer'
 import { CustomerContext, CustomerContextType } from '../contexts/CustomerContext'
 import EmptyList from '../EmptyList'
-import Button from '../../common/Buttom'
+import Button from '../../common/Button'
 import { GrAdd } from 'react-icons/gr'
+import { useTranslation } from 'react-i18next'
 
 export default function CustomerList() {
 	const service = new CustomerService()
 
 	const [customers, setCustomers] = useState<ICustomer[]>([])
-	const { customer, setCustomer, setCreate, create } = useContext(CustomerContext) as CustomerContextType
+	const { customer, setCustomer, setCreate, create, deleteCustomer, setDeleteCustomer } = useContext(CustomerContext) as CustomerContextType
+	const { t } = useTranslation()
 
 	const getInitialData = async () => {
 		const data = await service.getAll()
@@ -24,11 +26,20 @@ export default function CustomerList() {
 	}, [])
 
 	useEffect(() => {
+		console.log('customer', customer)
+		console.log('deleteCustomer', deleteCustomer)
 		if (customer) {
 			setCustomers((prev: ICustomer[]) => {
 				if (create) {
 					setCreate(false)
 					return [...prev, customer]
+				}
+
+				if (deleteCustomer) {
+					const id = deleteCustomer._id
+					setDeleteCustomer(null)
+					setCustomer(null)
+					return prev.filter((c: ICustomer) => c._id !== id)
 				}
 
 				return prev.map((c: ICustomer) => {
@@ -39,7 +50,7 @@ export default function CustomerList() {
 				})
 			})
 		}
-	}, [customer])
+	}, [customer, deleteCustomer])
 
 	const handleAddNew = () => {
 		setCustomer(null)
@@ -82,7 +93,7 @@ export default function CustomerList() {
 			</CustomerListBox>
 			{customers.length > 0 && (
 				<AddNewButtom>
-					<Button startIcon={<GrAdd />} id='addNew' name='Add Customer' onClick={handleAddNew} />
+					<Button startIcon={<GrAdd />} id='addNew' name={t('customer.list.add.button')} onClick={handleAddNew} />
 				</AddNewButtom>
 			)}
 		</>
