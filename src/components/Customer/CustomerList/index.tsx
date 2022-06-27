@@ -26,8 +26,6 @@ export default function CustomerList() {
 	}, [])
 
 	useEffect(() => {
-		console.log('customer', customer)
-		console.log('deleteCustomer', deleteCustomer)
 		if (customer) {
 			setCustomers((prev: ICustomer[]) => {
 				if (create) {
