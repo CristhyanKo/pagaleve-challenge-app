@@ -28,8 +28,6 @@ export const AddNewButtom = styled.div`
 	top: -50px;
 	opacity: 0.7;
 	margin-right: 15px;
-	width: 190px;
-	float: inline-end;
 	:hover {
 		opacity: 1;
 	}
